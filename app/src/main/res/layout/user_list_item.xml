@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/regularMargin">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/entryTestCardiew"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/entryTestListItemImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:id="@+id/entryTestListItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/entryTestListItemImage"
+                app:layout_constraintLeft_toRightOf="@id/entryTestListItemImage"
+                android:textSize="@dimen/textListItemName"
+                android:layout_marginLeft="@dimen/regularMargin"
+                android:layout_marginTop="@dimen/littleMargin"
+                android:fontFamily="sans-serif-black"/>
+            <TextView
+                android:id="@+id/entryTestListItemEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hola"
+                app:layout_constraintTop_toBottomOf="@id/entryTestListItemName"
+                app:layout_constraintLeft_toLeftOf="@id/entryTestListItemName"
+                android:layout_marginTop="@dimen/superLittleMaring"
+                android:textSize="@dimen/textListItemEmail"
+                android:visibility="gone">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/entryTestLinearMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Usuarios disponibles"
+                    android:textSize="@dimen/title"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_marginTop="@dimen/bigMargin"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estos son los usuarios actualmente disponibles para visualizar"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/bigMargin"
+                    android:layout_marginRight="@dimen/bigMargin"
+                    android:textSize="@dimen/subtitle"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/entryTestRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/regularMargin"
+                    android:layout_marginLeft="@dimen/regularMargin"
+                    android:layout_marginRight="@dimen/regularMargin"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/entryTestMapsImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_launcher"
+                app:layout_constraintTop_toBottomOf="@+id/entryTestLinearMainLayout"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="@dimen/regularMargin"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</FrameLayout>

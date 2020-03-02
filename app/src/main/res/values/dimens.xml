@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="littleMargin">10dp</dimen>
+    <dimen name="superLittleMaring">5dp</dimen>
+    <dimen name="regularMargin">20dp</dimen>
+    <dimen name="bigMargin">40dp</dimen>
+
+    <dimen name="textListItemName">13dp</dimen>
+    <dimen name="textListItemEmail">11dp</dimen>
+    <dimen name="title">24dp</dimen>
+    <dimen name="subtitle">16dp</dimen>
+</resources>
