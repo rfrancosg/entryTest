@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.entrytest.Model.User
-import com.example.myapplication.MapsActivity
+import com.example.myapplication.View.Activity.MapsActivity
 import com.example.myapplication.R
 
 import com.squareup.picasso.Picasso
@@ -40,8 +41,8 @@ class EntryTestListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        getUsers()
         var inflate = inflater.inflate(R.layout.fragment_entry_test_list, container, false)
+        getUsers()
         viewManager = LinearLayoutManager(context)
 
         return inflate
@@ -79,7 +80,7 @@ class EntryTestListFragment : Fragment() {
 
     fun getUsers(){
         val url = "https://reqres.in/api/users/"
-
+        Thread.sleep(2000)
         val que = Volley.newRequestQueue(context)
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -109,6 +110,11 @@ class EntryTestListFragment : Fragment() {
                         val intent = Intent(activity, MapsActivity::class.java)
                         intent.putExtra("Users", ArrayList(imagesArray))
                         startActivity(intent)
+                    }
+                    entryTestRefreshImage.setOnClickListener {
+                        users.clear()
+                        getUsers()
+                        Toast.makeText(context, "Usuarios actualizados", Toast.LENGTH_SHORT).show()
                     }
                     fillData()
                 }

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.View.Activity
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,12 +18,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
 import kotlin.random.Random
-import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.util.Log
+import com.example.myapplication.R
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 private const val PERMISION_REQUEST = 10
@@ -113,27 +112,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else{
                 latLngList = LatLng(latLng.latitude-randomLatIndex*multiplierFactor,latLng.longitude-randomLonIndex*multiplierFactor)
             }
-            mMap.addMarker(MarkerOptions().position(latLngList))
-            //TODO SET IMAGES AS MARKERS
-            //mMap.addMarker(MarkerOptions().position(latLngList).icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromURL(item))))
+            getBitmapFromURL(item, latLngList)
         }
 
         execute = true
     }
 
 
-    fun getBitmapFromURL(src: String): Bitmap? {
-        try {
-            val url = URL(src)
-            val connection = url.openConnection() as HttpURLConnection
-            connection.setDoInput(true)
-            connection.connect()
-            val input = connection.getInputStream()
-            return BitmapFactory.decodeStream(input)
-        } catch (e: IOException) {
-            // Log exception
-            return null
-        }
+    fun getBitmapFromURL(src: String, latLng: LatLng){
+        Picasso.get().load(src).into(object : com.squareup.picasso.Target {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                Log.d("bitmap", "this is my bitmap: "+bitmap)
+                //it fills the markers with the images and random locations
+                mMap.addMarker(MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromBitmap(bitmap)))
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+
+            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {}
+        })
 
     }
 
