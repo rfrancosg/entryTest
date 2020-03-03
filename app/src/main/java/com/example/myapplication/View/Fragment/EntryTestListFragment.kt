@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley
 import com.example.entrytest.Model.User
 import com.example.myapplication.View.Activity.MapsActivity
 import com.example.myapplication.R
+import com.example.myapplication.View.MyAdapter
 
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_entry_test_list.*
@@ -29,7 +30,8 @@ import org.json.JSONObject
  * A simple [Fragment] subclass.
  */
 class EntryTestListFragment : Fragment() {
-    val TAG = "EntryTestListFragment"
+
+    private val TAG = "EntryTestListFragment"
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -47,35 +49,6 @@ class EntryTestListFragment : Fragment() {
 
         return inflate
         }
-    class MyAdapter(private val myDataset: MutableList<User>) :
-        RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
-        class MyViewHolder(val textView: ConstraintLayout) : RecyclerView.ViewHolder(textView)
-
-        override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): MyAdapter.MyViewHolder {
-            val ConstraintLayout = LayoutInflater.from(parent.context)
-                .inflate(R.layout.user_list_item, parent, false) as ConstraintLayout
-            return MyViewHolder(ConstraintLayout)
-        }
-
-        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
-            holder.textView.entryTestListItemName.text = myDataset.get(position).first_name + " "+ myDataset.get(position).last_name
-            holder.textView.entryTestListItemEmail.text = myDataset.get(position).email
-            Picasso.get().load(myDataset.get(position).url).into(holder.textView.entryTestListItemImage)
-            holder.textView.setOnClickListener {
-                if (it.entryTestListItemEmail.visibility == View.GONE){
-                    it.entryTestListItemEmail.visibility = View.VISIBLE
-                }
-                else{
-                    it.entryTestListItemEmail.visibility = View.GONE
-                }
-            }
-        }
-
-        override fun getItemCount() = myDataset.size
-    }
 
 
     fun getUsers(){
@@ -126,14 +99,6 @@ class EntryTestListFragment : Fragment() {
         que.add(jsonObjectRequest)
     }
 
-    class Foo(json: String) : JSONObject(json) {
-        val id = this.optInt("id")
-        val email: String = this.optString("email")
-        val first_name: String = this.optString("first_name")
-        val last_name: String = this.optString("last_name")
-        val avatar: String = this.optString("avatar")
-    }
-
     private fun fillData(){
         viewAdapter = MyAdapter(users)
 
@@ -145,4 +110,13 @@ class EntryTestListFragment : Fragment() {
 
         }
     }
+
+    class Foo(json: String) : JSONObject(json) {
+        val id = this.optInt("id")
+        val email: String = this.optString("email")
+        val first_name: String = this.optString("first_name")
+        val last_name: String = this.optString("last_name")
+        val avatar: String = this.optString("avatar")
+    }
+
 }
